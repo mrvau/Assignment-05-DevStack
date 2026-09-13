@@ -2,7 +2,7 @@ import logo from "../assets/logo-text.png";
 import hamburger from "../assets/hamburger.png";
 const Navbar = () => {
 	return (
-		<div className="md:border-b border-gray-300 m-1">
+		<div className="md:border-b border-gray-300 m-1 md:m-0">
 			<nav className="container nav">
 				<div className="hamburger">
 					<img

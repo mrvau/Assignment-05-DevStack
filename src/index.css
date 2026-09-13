@@ -11,11 +11,11 @@ body {
 }
 
 @utility container {
-	@apply max-w-full md:max-w-3xl lg:max-w-7xl mx-auto;
+	@apply max-w-full md:max-w-3xl lg:max-w-7xl mx-auto px-3;
 }
 
 @utility nav {
-	@apply flex items-center justify-between bg-white px-3 md:px-0 py-1 md:py-3 rounded-md shadow-md md:shadow-none text-[10px] md:text-sm lg:text-base;
+	@apply flex items-center justify-between bg-white py-1 md:py-3 rounded-md shadow-md md:shadow-none text-[10px] md:text-sm lg:text-base;
 
 	& > .hamburger {
 		@apply flex-1 block md:hidden;
@@ -36,6 +36,14 @@ body {
 	& > .nav-links {
 		& > ul {
 			@apply hidden md:flex items-center justify-between gap-6 md:gap-4;
+
+      & > li {
+        @apply cursor-pointer transition-all hover:text-pink-500 text-gray-700;
+      }
+
+      & > li:nth-child(1) {
+        @apply text-pink-500 font-semibold;
+      }
 		}
 	}
 
@@ -43,15 +51,51 @@ body {
 		@apply flex flex-1 items-center justify-end gap-1;
 
 		& > button {
-			@apply transition-all px-2 py-1 text-nowrap text-center cursor-pointer;
+			@apply transition-all px-2 py-1 md:px-4 md:py-2 text-nowrap text-center cursor-pointer;
 		}
 
 		& > button:nth-child(1) {
-			@apply hover:text-pink-500 font-bold;
+			@apply hover:text-pink-500 font-medium;
 		}
 
 		& > button:nth-child(2) {
-			@apply bg-linear-to-br hover:bg-linear-to-tl from-pink-500 to-purple-500 text-white font-semibold rounded-full;
+			@apply bg-linear-to-br from-pink-500 to-purple-500 text-white font-semibold rounded-full hover:shadow-sm hover:shadow-pink-500;
 		}
 	}
+}
+
+@utility hero {
+  @apply flex flex-col md:flex-row items-center justify-center md:justify-between pt-10;
+
+  & > .hero-content {
+    @apply text-center md:text-left w-sm md:max-w-lg;
+
+    & > h1 {
+      @apply text-3xl md:text-4xl lg:text-5xl font-bold font-secondary mb-4 md:leading-16;
+
+      & > span {
+        @apply bg-linear-to-r from-orange-600 via-pink-600 to-purple-700 bg-clip-text text-transparent;
+      }
+    }
+
+    & > p {
+      @apply text-sm md:text-base lg:text-lg text-gray-600 mb-6;
+    }
+
+    & > .cta {
+      @apply flex gap-3 justify-center md:justify-start;
+
+      & > button {
+        @apply px-2 md:px-4 py-2 rounded-md transition-all text-xs md:text-sm lg:text-base cursor-pointer;
+      }
+
+      & > button:nth-child(1) {
+        @apply flex-1 md:flex-none md:w-50 bg-linear-to-br from-orange-500 to-pink-500 text-white hover:shadow-sm hover:shadow-orange-800;
+      }
+
+      & > button:nth-child(2) {
+        @apply flex-1 md:flex-none md:w-50 border border-gray-300 text-gray-700 hover:bg-gray-100;
+      }
+    }
+  }
 }
