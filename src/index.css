@@ -1,1 +1,51 @@
 @import "tailwindcss";
+
+body {
+	@apply bg-[#fbfbfc] md:bg-white;
+}
+
+@utility container {
+	@apply max-w-full md:max-w-3xl lg:max-w-7xl mx-auto;
+}
+
+@utility nav {
+	@apply flex items-center justify-between bg-white px-4 py-1 md:py-3 rounded-md shadow-md md:shadow-none text-[10px] md:text-sm lg:text-base;
+
+	& > .hamburger {
+		@apply flex-1 block md:hidden;
+
+		& > img {
+			@apply w-4;
+		}
+	}
+
+	& > .logo {
+		@apply flex md:block flex-1 justify-center cursor-pointer;
+
+		& img {
+			@apply w-20 md:w-28 lg:w-34;
+		}
+	}
+
+	& > .nav-items {
+		& > ul {
+			@apply hidden md:flex items-center justify-between gap-6 md:gap-4;
+		}
+	}
+
+	& > .nav-buttons {
+		@apply flex flex-1 items-center justify-end gap-1;
+
+		& > button {
+			@apply transition-all px-2 py-1 text-nowrap text-center cursor-pointer;
+		}
+
+		& > button:nth-child(1) {
+			@apply hover:text-pink-500 font-bold;
+		}
+
+		& > button:nth-child(2) {
+			@apply bg-linear-to-br hover:bg-linear-to-tl from-pink-500 to-purple-500 text-white font-semibold rounded-full;
+		}
+	}
+}
