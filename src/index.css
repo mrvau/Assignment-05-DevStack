@@ -99,3 +99,35 @@ body {
     }
   }
 }
+
+@utility technology-grid {
+  @apply text-center md:text-left;
+
+  & > h2 {
+    @apply text-2xl md:text-3xl lg:text-4xl font-bold mb-2;
+
+    & > span {
+      @apply bg-linear-to-br from-orange-800 via-pink-600 to-purple-900 bg-clip-text text-transparent;
+    }
+  }
+
+  & > p {
+    @apply text-sm md:text-base lg:text-lg text-gray-600 mb-6;
+  }
+
+  & > .grid-container {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4;
+  }
+}
+
+@utility card {
+  @apply rounded-lg shadow-md p-4;
+
+  & > .card-header {
+    @apply flex items-center justify-between;
+
+    & > .card-logo {
+      @apply w-10;
+    }
+  }
+}
