@@ -1,7 +1,13 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+@theme {
+  --font-primary: "Plus Jakarta Sans", sans-serif;
+  --font-secondary: "Inter", sans-serif;
+}
 
 body {
-	@apply bg-[#fbfbfc] md:bg-white;
+	@apply bg-[#fbfbfc] md:bg-white font-primary;
 }
 
 @utility container {
@@ -9,7 +15,7 @@ body {
 }
 
 @utility nav {
-	@apply flex items-center justify-between bg-white px-4 py-1 md:py-3 rounded-md shadow-md md:shadow-none text-[10px] md:text-sm lg:text-base;
+	@apply flex items-center justify-between bg-white px-3 md:px-0 py-1 md:py-3 rounded-md shadow-md md:shadow-none text-[10px] md:text-sm lg:text-base;
 
 	& > .hamburger {
 		@apply flex-1 block md:hidden;
@@ -20,14 +26,14 @@ body {
 	}
 
 	& > .logo {
-		@apply flex md:block flex-1 justify-center cursor-pointer;
+		@apply flex-1 cursor-pointer;
 
 		& img {
-			@apply w-20 md:w-28 lg:w-34;
+			@apply w-20 block md:inline mx-auto md:w-28 lg:w-34;
 		}
 	}
 
-	& > .nav-items {
+	& > .nav-links {
 		& > ul {
 			@apply hidden md:flex items-center justify-between gap-6 md:gap-4;
 		}
