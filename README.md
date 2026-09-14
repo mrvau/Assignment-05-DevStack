@@ -1,78 +1,48 @@
-# React + TypeScript + Vite
+# DevStack
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+DevStack is an interactive React app for exploring development technologies and building a personal stack. Browse frontend, backend, database, CSS, DevOps, and other tools, then add your choices to a stack for easy comparison and management.
 
-Currently, two official plugins are available:
+## Technologies Used
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- React 19
+- TypeScript
+- Vite
+- Tailwind CSS
+- React Toastify
+- ESLint
 
-## React Compiler
+## Features
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+1. **Explore technology options** - View technology cards with descriptions, categories, difficulty levels, ratings, and badges.
+2. **Build a custom stack** - Add technologies to your stack while preventing duplicate selections.
+3. **Manage selections easily** - Remove individual technologies or clear the entire stack, with toast notifications for each action.
 
-Note: This will impact Vite dev & build performances.
-You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
+## React Questions and Answers
 
-## Expanding the ESLint configuration
+### 1. What is JSX, and why is it used in React?
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+JSX is a syntax that lets us write HTML-like elements inside JavaScript or TypeScript. React uses JSX to describe what the user interface should look like in a clear and readable way.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 2. What is the difference between props and state?
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Props are values passed from a parent component to a child component. State is data managed inside a component that can change and cause the UI to update.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 3. What does the `useState` hook do, and where did you use it in this project?
 
-```
+`useState` adds changeable data to a function component. In `TechnologyGrid`, it stores the loaded technologies, selected technologies, and loading status.
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+### 4. What does the `useEffect` hook do, and why did you need it to load the JSON data?
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+`useEffect` runs side effects after a component renders. It loads `/data.json` when `TechnologyGrid` first appears, so the technology data is available for the cards.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 5. Why does every item in a `.map()` list need a unique `key` prop?
 
-```
+A unique `key` helps React identify each list item. This lets React update only the items that changed and keeps list rendering efficient and predictable.
+
+### 6. What is conditional rendering? Show one place you used it.
+
+Conditional rendering means showing different UI based on a condition. In `Stack`, the selected technology list is shown when `selectedItems.length` is greater than zero; otherwise, the message `Your stack is empty` is displayed.
+
+### 7. How do you pass data from a parent component to a child component, and how does a child send something back to the parent?
+
+The parent passes data through props. It can also pass a function as a prop, which the child calls to send an event or value back. In this project, `TechnologyGrid` passes `selectedItems` and handler functions to `Stack`, and `Stack` calls those handlers when a user removes an item.
