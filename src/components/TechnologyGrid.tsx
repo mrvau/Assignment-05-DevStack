@@ -32,19 +32,19 @@ const TechnologyGrid = () => {
 		const selectedItem = data.filter((item) => item.id === id);
 		
 		setSelectedItems([...selectedItems, selectedItem[0]]);
-		toast(`${selectedItem[0].name} added to the Stack`)
+		toast.success(`${selectedItem[0].name} added to the Stack`)
 	};
 	
 	const handleRemoveSelection = (id: string) => {
 		const remainingItems = selectedItems.filter((item) => item.id !== id);
 		const selectedItem = data.filter((item) => item.id === id);
 		setSelectedItems(remainingItems);
-		toast(`${selectedItem[0].name} removed from the Stack`)
+		toast.warning(`${selectedItem[0].name} removed from the Stack`)
 	};
 
 	const handleRemoveAll = () => {
 		setSelectedItems([]);
-		toast("All items removed from the Stack")
+		toast.warning("All items removed from the Stack")
 	};
 
 	return (
