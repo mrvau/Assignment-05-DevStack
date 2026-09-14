@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import TechnologyCard from "./TechnologyCard";
 import type { Data } from "../types/data.type";
 import Stack from "./Stack";
+import { toast } from "react-toastify";
 const TechnologyGrid = () => {
 	const [data, setData] = useState<Data[]>([]);
 	const [selectedItems, setSelectedItems] = useState<Data[]>([]);
@@ -25,22 +26,25 @@ const TechnologyGrid = () => {
 
 	const handleSelection = (id: string) => {
 		if (selectedItems.some((item) => item.id === id)) {
-			alert("Item already selected!");
 			return;
 		}
 
 		const selectedItem = data.filter((item) => item.id === id);
-
+		
 		setSelectedItems([...selectedItems, selectedItem[0]]);
+		toast(`${selectedItem[0].name} added to the Stack`)
 	};
-
+	
 	const handleRemoveSelection = (id: string) => {
 		const remainingItems = selectedItems.filter((item) => item.id !== id);
+		const selectedItem = data.filter((item) => item.id === id);
 		setSelectedItems(remainingItems);
+		toast(`${selectedItem[0].name} removed from the Stack`)
 	};
 
 	const handleRemoveAll = () => {
 		setSelectedItems([]);
+		toast("All items removed from the Stack")
 	};
 
 	return (
