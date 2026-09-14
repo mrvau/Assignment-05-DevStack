@@ -3,11 +3,13 @@ import type { Data } from "../types/data.type";
 interface TechnologyCardProps {
 	item: Data;
 	handleSelection: (id: string) => void;
+	isSelected: boolean;
 }
 
 const TechnologyCard = ({
 	item: {id, name, badge, category, description, difficulty, icon, rating },
-	handleSelection
+	handleSelection,
+	isSelected
 }: TechnologyCardProps) => {
 	console.log(badge.toLowerCase());
 	return (
@@ -30,7 +32,7 @@ const TechnologyCard = ({
 					<div className="card-difficulty">{difficulty}</div>
 					<div className="card-rating">★ {rating}</div>
 				</div>
-				<button onClick={() => handleSelection(id)}>Add to Stack</button>
+				<button onClick={() => handleSelection(id)} disabled={isSelected}>{isSelected ? "Added to Stack" : "Add to Stack"}</button>
 			</div>
 		</div>
 	);

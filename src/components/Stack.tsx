@@ -11,7 +11,7 @@ const Stack = ({ selectedItems, handleRemoveSelection, handleRemoveAll }: StackP
 	return (
 		<div className="stack">
 			<h3>Your Stack</h3>
-			<p>{selectedItems.length ? selectedItems.length : 0} Technology selected</p>
+			<p>{selectedItems.length ? `${selectedItems.length} Technologies Selected` : "No Technologies selected yet"}</p>
 
 			{selectedItems.length ? (
 				<>
@@ -37,7 +37,7 @@ const Stack = ({ selectedItems, handleRemoveSelection, handleRemoveAll }: StackP
           <button onClick={handleRemoveAll}>Remove All</button>
 				</>
 			) : (
-				<div>No Technology Selected</div>
+				<div>Your stack is empty</div>
 			)}
 		</div>
 	);

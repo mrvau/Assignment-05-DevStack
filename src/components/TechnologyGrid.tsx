@@ -5,20 +5,28 @@ import Stack from "./Stack";
 const TechnologyGrid = () => {
 	const [data, setData] = useState<Data[]>([]);
 	const [selectedItems, setSelectedItems] = useState<Data[]>([]);
+	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const response = await fetch("/data.json");
-			const result = await response.json();
-			setData(result);
+			try {
+				setIsLoading(true);
+				const response = await fetch("/data.json");
+				const result = await response.json();
+				setData(result);
+			} catch (error) {
+				console.error(error);
+			} finally {
+				setIsLoading(false);
+			}
 		};
-
 		fetchData();
 	}, []);
 
 	const handleSelection = (id: string) => {
 		if (selectedItems.some((item) => item.id === id)) {
 			alert("Item already selected!");
+			return;
 		}
 
 		const selectedItem = data.filter((item) => item.id === id);
@@ -33,7 +41,7 @@ const TechnologyGrid = () => {
 
 	const handleRemoveAll = () => {
 		setSelectedItems([]);
-	}
+	};
 
 	return (
 		<div className="container technology">
@@ -43,17 +51,31 @@ const TechnologyGrid = () => {
 			<p>Pick one technology per category to build your ideal stack.</p>
 
 			<div className="technology-container">
-				<div className="technology-grid">
-					{data.map((item) => (
-						<TechnologyCard
-							key={item.id}
-							item={item}
-							handleSelection={handleSelection}
-						/>
-					))}
-				</div>
+				{isLoading ? (
+					<div className="text-lg text-gray-500">Loading...</div>
+				) : (
+					<div className="technology-grid">
+						{data.map((item) => {
+							const isSelected = selectedItems.some(
+								(selected) => selected.id === item.id,
+							);
+							return (
+								<TechnologyCard
+									key={item.id}
+									item={item}
+									handleSelection={handleSelection}
+									isSelected={isSelected}
+								/>
+							);
+						})}
+					</div>
+				)}
 				<div>
-					<Stack selectedItems={selectedItems} handleRemoveSelection={handleRemoveSelection} handleRemoveAll={handleRemoveAll} />
+					<Stack
+						selectedItems={selectedItems}
+						handleRemoveSelection={handleRemoveSelection}
+						handleRemoveAll={handleRemoveAll}
+					/>
 				</div>
 			</div>
 		</div>
